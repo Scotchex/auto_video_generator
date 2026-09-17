@@ -1,9 +1,14 @@
+import os
+
 import praw
+from dotenv import load_dotenv
+
+load_dotenv()
 
 reddit = praw.Reddit(
-    client_id = 'S96sUzqfQJGYtE47wGHpQw',
-    client_secret = 'mJ5OZrNePPppB7l7zjvlY84o2UcR3Q',
-    user_agent = 'money by u/scotchex'
+    client_id=os.environ["REDDIT_CLIENT_ID"],
+    client_secret=os.environ["REDDIT_CLIENT_SECRET"],
+    user_agent=os.getenv("REDDIT_USER_AGENT", "money by u/scotchex")
 )
 
 """ subreddit = reddit.subreddit('memes')
@@ -39,4 +44,3 @@ def prepare(dict):
     for index, (title, text) in enumerate(dict.items()):
         result.append(f"index:{index}, title:{title}, text:{text}")
     return "\n".join(result)
-
